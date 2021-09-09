@@ -11,9 +11,10 @@ $SEMGREP
 
 if [ -z "${INPUT_SEMGREP_IGNORE}" ]
 then
-      PARSE="ruby /parser.rb -f $RANDOM_FILE -r $GITHUB_WORKSPACE/"
+  PARSE="ruby /parser.rb -f $RANDOM_FILE -r $GITHUB_WORKSPACE/"
 else
-      PARSE="ruby /parser.rb -f $RANDOM_FILE -i ${INPUT_SEMGREP_IGNORE} -r \"$GITHUB_WORKSPACE/\""
+  wget ${INPUT_SEMGREP_IGNORE} -O $GITHUB_WORKSPACE/semgrep.ignore
+  PARSE="ruby /parser.rb -f $RANDOM_FILE -i $GITHUB_WORKSPACE/semgrep.ignore -r \"$GITHUB_WORKSPACE/\""
 fi
 
 # Display the output on screen for debugging reasons

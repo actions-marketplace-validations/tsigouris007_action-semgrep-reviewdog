@@ -27,7 +27,7 @@ Semgrep flags.
 Default: `--disable-verion-check --verbose --config=p/ci`
 Note: This is a free field to add any flags, includes, exludes, etc. you just have to prepare it in a previous step.
 ### `semgrep_ignore`
-Custom semgrep ignore fingerprint file.
+Custom semgrep ignore fingerprint file. You must provide a URL of the raw file.
 Default: `nil`
 Note: This is a custom functionality that ignores semgrep fingerprints (these are custom too) and you have the ability to ignore specific ones. Your ignore file should look like:
 ```json
@@ -76,4 +76,5 @@ jobs:
           filter_mode: nofilter
           semgrep_flags: "${{ env.SCAN_FILES }} --config=p/ci --disable-version-check"
           tool_name: Semgrep findings
+          semgrep_ignore: "https://raw.github.com/repo/branch/semgrep.ignore"
 ```
