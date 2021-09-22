@@ -22,7 +22,7 @@ $PARSE
 
 # Filter with jq and pipe to reviewdog for annotations
 $PARSE \
-  | jq -r '.fingerprints[] | "\(.severity[0:1]);\(.file);\(.start_line);\(.warning_type) [\(.fingerprint)]"' \
+  | jq -r '.fingerprints[] | "\(.severity[0:1]);\(.file);\(.start_line);\(.check_name): \(.warning_type) - \(.message) | Lines: \(.start_line) - \(.end_line)  [\(.fingerprint)]"' \
   | reviewdog \
       -efm="%t;%f;%l;%m" \
       -name="${INPUT_TOOL_NAME}" \
