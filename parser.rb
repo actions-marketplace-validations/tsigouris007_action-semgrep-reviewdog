@@ -27,6 +27,14 @@ require 'set'
 require 'optparse'
 require 'English'
 
+def fix_nil(str)
+  if !str.nil?
+    return str.gsub("\n", ' ').squeeze(' ')
+  else
+    return nil
+  end
+end
+
 CATEGORY = 'security'.freeze
 INFO = 'INFO'.freeze
 
@@ -114,16 +122,21 @@ fingerprints =
     findings << result['check_id']
 
     warnings += 1
+    
+    message = fix_nil(extras['message'])
+    warn_type = fix_nil(extras['metadata']['owasp'])
+    warn_detail = fix_nil(extras['metadata']['cwe'])
+    code = fix_nil(extras['lines'])
 
     {
       fingerprint: line_fingerprint,
-      warning_type: "#{extras['metadata']['owasp'].gsub("\n", ' ').squeeze(' ')} / #{extras['metadata']['cwe'].gsub("\n", ' ').squeeze(' ')}",
+      warning_type: "#{warn_type} / #{warn_detail}",
       check_name: result['check_id'],
-      message: extras['message'].gsub("\n", ' ').squeeze(' '),
+      message: message,
       file: path,
       start_line: result['start']['line'],
       end_line: result['end']['line'],
-      code: extras['lines'].gsub("\n", ' ').squeeze(' '),
+      code: code,
       severity: extras['severity']
     }
   end.compact
