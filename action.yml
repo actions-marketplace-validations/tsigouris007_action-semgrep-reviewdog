@@ -1,6 +1,6 @@
 name: 'Run semgrep with reviewdog'
 description: '🐶 Run semgrep with reviewdog on pull requests to improve code review experience.'
-author: 'mgrachev (reviewdog)'
+author: 'tsigouris007'
 inputs:
   github_token:
     description: 'GITHUB_TOKEN.'
