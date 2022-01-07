@@ -1,4 +1,4 @@
-name: 'Run semgrep with reviewdog'
+name: 'Run SAST Analysis via Semgrep and Reviewdog (+extras)'
 description: '🐶 Run semgrep with reviewdog on pull requests to improve code review experience.'
 author: 'tsigouris007'
 inputs:
